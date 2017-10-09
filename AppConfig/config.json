@@ -1,0 +1,25 @@
+{
+   "general_settings":{
+      "source_images_location":"/home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/resources",
+      "download_location":"/home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/downloads"
+   },
+   "image_filter":{
+      "image_file_extensions":[
+         "jpg",
+         "bmp",
+         "png",
+         "gif"
+      ]
+   },
+   "minio_settings":{
+      "endpoint":"play.minio.io:9000",
+      "key":"Q3AM3UQ867SPQQA43P2F",
+      "secret":"zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG",
+      "bucket_name":"xis-images",
+      "prefix":"xis-images-prefix"
+   },
+   "mongo_connection_settings":{
+      "host":"localhost",
+      "port":27017
+   }
+}
