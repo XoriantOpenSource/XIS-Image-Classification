@@ -1,4 +1,7 @@
 .idea
 Mongodb_OpsHandler/__pycache__/__init__.cpython-35.pyc
 Mongodb_OpsHandler/__pycache__/DbOperationsHandler.cpython-35.pyc
+Image_EncoderDecoder/__pycache__/
+Minio_OpsHandler/__pycache__/
+
 
