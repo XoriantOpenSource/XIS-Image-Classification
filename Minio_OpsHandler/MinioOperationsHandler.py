@@ -64,15 +64,24 @@ class MinioOperationsHandler:
             # log error here
             return False
 
-    def download_image(self, image_object_name, download_location):
-        if image_object_name is None or not isdir(download_location):
+    def get_object_name(self,image_object_name):
+        if image_object_name is None:
+            return None
+
+        bucket_name,object_name = image_object_name.split('_')
+        filepath = join(self.config_settings.download_location, object_name)
+        return bucket_name,object_name,filepath
+
+    def download_image(self, image_object_name):
+        if image_object_name is None or not isdir(self.config_settings.download_location):
+            # log error here
             return None
         self.check_status()
         try:
-            bucket_name, object_name = image_object_name.split('_')
-            if bucket_name is not None and object_name is not None:
+            bucket_name,object_name, imagefilepath = self.get_object_name(image_object_name)
+            if bucket_name is not None and object_name is not None and imagefilepath is not None:
                 self.minio_client.fget_object(bucket_name=bucket_name, object_name=object_name,
-                                              file_path=join(download_location, object_name))
+                                              file_path=imagefilepath)
                 return True
             return False
         except error.ResponseError as ex:
