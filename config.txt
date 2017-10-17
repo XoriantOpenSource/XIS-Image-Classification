@@ -16,9 +16,9 @@ prefix = xis-images-prefix
 [google_cloud_storage_settings]
 bucket_name = xis-images
 project_id = imageclassifier-181905
-     
+
 [mongo_connection_settings]
- host = localhost
- port =27017
+host = localhost
+port =27017
      
 

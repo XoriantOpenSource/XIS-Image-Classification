@@ -34,31 +34,30 @@ class ConfigSettings:
             print("config file does not exists")
             return False
         try:
-            configParser = configparser.ConfigParser()
-            configParser.read_file(open(self.config_file))
-            self.source_images_location = configParser["general_settings"]["source_images_location"]
-            self.download_location = configParser["general_settings"]["download_location"]
-            self.use_gcp_storage = configParser["general_settings"]["use_gcp_storage"]
-
-            self.image_files_extensions = configParser["image_filter"]["image_file_extensions"]
+            config_parser = configparser.ConfigParser()
+            config_parser.read_file(open(self.config_file))
+            self.source_images_location = config_parser["general_settings"]["source_images_location"]
+            self.download_location = config_parser["general_settings"]["download_location"]
+            self.use_gcp_storage = config_parser["general_settings"]["use_gcp_storage"]
+            self.image_files_extensions = config_parser["image_filter"]["image_file_extensions"]
 
             # read minio server settings
-            self.minio_endpoint = configParser["minio_settings"]["endpoint"]
-            self.minio_key = configParser["minio_settings"]["key"]
-            self.minio_secret = configParser["minio_settings"]["secret"]
-            self.minio_bucket_name = configParser["minio_settings"]["bucket_name"]
-            self.minio_prefix = configParser["minio_settings"]["prefix"]
+            self.minio_endpoint = config_parser["minio_settings"]["endpoint"]
+            self.minio_key = config_parser["minio_settings"]["key"]
+            self.minio_secret = config_parser["minio_settings"]["secret"]
+            self.minio_bucket_name = config_parser["minio_settings"]["bucket_name"]
+            self.minio_prefix = config_parser["minio_settings"]["prefix"]
 
             # read mongo settings
-            self.mongo_host = configParser["mongo_connection_settings"]["host"]
-            self.mongo_port = configParser["mongo_connection_settings"]["port"]
+            self.mongo_host = config_parser["mongo_connection_settings"]["host"]
+            self.mongo_port = config_parser["mongo_connection_settings"]["port"]
 
             # read gcp storage settings
-            self.project_id = configParser["google_cloud_storage_settings"]["project_id"]
-            self.gstorage_bucket_name = configParser["google_cloud_storage_settings"]["bucket_name"]
+            self.project_id = config_parser["google_cloud_storage_settings"]["project_id"]
+            self.gstorage_bucket_name = config_parser["google_cloud_storage_settings"]["bucket_name"]
             return True
 
-        except Exception as ex:
+        except:
             print("failed to open config file")
             return False
 

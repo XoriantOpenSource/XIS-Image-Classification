@@ -13,9 +13,10 @@ def main():
     image_indexer.index_images()
 
     # run in search mode
-    #query = ['cat','dog']
-    #image_indexer.search_by_query(query)
-    #return
+    # query = ['cat','dog']
+    # image_indexer.search_by_query(query)
+    # return
+
 
 if __name__ == "__main__":
     main()
