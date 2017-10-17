@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, jsonify, abort
 import json
-from AppConfig.AppConfigSettings import AppConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 from Mongodb_OpsHandler.DbOperationsHandler import DbOperationsHandler
 
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 def init_api():
     global config_settings, dbOpsHandler
-    config_settings = AppConfigSettings()
+    config_settings = ConfigSettings()
     if config_settings.read_config_settings():
         dbOpsHandler = DbOperationsHandler(config_settings)
 

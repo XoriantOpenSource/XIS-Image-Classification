@@ -7,7 +7,7 @@ class DbOperationsHandler:
     def __init__(self,configSettings):
         self.config_settings = configSettings
         # db specific details
-        self.port = self.config_settings.mongo_port
+        self.port = int(self.config_settings.mongo_port)
         self.host = self.config_settings.mongo_host
         self.db_name = 'Image_Labels'
         self.collection_name = 'Images_Collection'
