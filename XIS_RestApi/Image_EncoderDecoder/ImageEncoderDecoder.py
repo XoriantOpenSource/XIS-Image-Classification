@@ -1,9 +1,9 @@
 import base64
 from os import path
 
-from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 
-from XIS_RestApi.Minio_OpsHandler import MinioOperationsHandler
+from Minio_OpsHandler.MinioOperationsHandler import MinioOperationsHandler
 
 
 class ImageEncoderDecoder:

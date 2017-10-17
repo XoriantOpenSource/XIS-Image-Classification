@@ -3,10 +3,11 @@ from os.path import isdir, join, isfile, basename, splitext
 
 from google.cloud import storage
 
-from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 
 
 class GCP_Storage_Crud:
+
     def __init__(self, appConfigSettings):
         self.bucket_name = appConfigSettings.gstorage_bucket_name
         self.appConfigSettings = appConfigSettings
@@ -34,7 +35,7 @@ class GCP_Storage_Crud:
 
                 # make object public
                 blob.make_public(client)
-                # return blob.public_url
+                #return blob.public_url
                 return True
 
         except IOError as ioerror:
@@ -75,7 +76,7 @@ class GCP_Storage_Crud:
         bucket = client.get_bucket(self.bucket_name)
         blob = bucket.blob(object_name)
         if blob is not None:
-            blob.download_to_filename(join(self.appConfigSettings.download_location, object_name))
+            blob.download_to_filename(join(self.appConfigSettings.download_location,object_name))
             print("{} downloaded successfully ".format(object_name))
 
 
@@ -89,3 +90,4 @@ if __name__ == '__main__':
         print(file_urls)
     else:
         print("error reading config settings")
+

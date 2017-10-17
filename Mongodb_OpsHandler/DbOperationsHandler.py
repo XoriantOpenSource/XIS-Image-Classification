@@ -1,12 +1,13 @@
 from pymongo import MongoClient
 
-from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 
 
 class DbOperationsHandler:
-
     def __init__(self,configSettings):
+
         self.config_settings = configSettings
+
         # db specific details
         self.port = int(self.config_settings.mongo_port)
         self.host = self.config_settings.mongo_host
@@ -63,7 +64,6 @@ class DbOperationsHandler:
     def search_by_labels(self, labels):
         if labels is None or len(labels) == 0:
             return False
-
         op_status = self.check_db_connection_status()
         try:
             if op_status is True:
@@ -78,7 +78,7 @@ class DbOperationsHandler:
                 return False
 
         except Exception as ex:
-            print(ex)
+
             # log exception here
             return False
 
@@ -89,10 +89,10 @@ def main():
         dbOps = DbOperationsHandler(config_settings)
         # image_doc = {'image_object_name': 'images_obj6', 'labels': ['cheetah', 'wild animal']}
         # dbOps.insert_image(image=image_doc)
-        search_filter = ['cat']
-        filtered_results = dbOps.search_by_labels(search_filter)
-        for filtered_result in filtered_results:
-            print(filtered_result)
+        # search_filter = ['cat', 'dog']
+        # filtered_results = dbOps.search_by_labels(search_filter)
+        # for filtered_result in filtered_results:
+        #     print(filtered_result)
 
 if __name__ == '__main__':
     main()
