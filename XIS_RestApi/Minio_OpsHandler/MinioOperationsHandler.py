@@ -5,7 +5,7 @@ import minio
 from minio import error
 from minio import policy
 
-from AppConfig.ConfigSettings import ConfigSettings
+from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
 
 
 class MinioOperationsHandler:

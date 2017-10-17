@@ -3,7 +3,7 @@ from os.path import isdir, join, isfile, basename, splitext
 
 from google.cloud import storage
 
-from AppConfig.ConfigSettings import ConfigSettings
+from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
 
 
 class GCP_Storage_Crud:

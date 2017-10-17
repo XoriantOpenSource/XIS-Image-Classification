@@ -4,7 +4,7 @@ from os.path import isfile
 
 class ConfigSettings:
     def __init__(self):
-        self.config_file = "/home/sujit25/Workspace/XIS_RestApi/config.txt"
+        self.config_file = "/home/sujit25/Workspace/XIS_App/config.txt"
 
         # general settings
         self.source_images_location = None

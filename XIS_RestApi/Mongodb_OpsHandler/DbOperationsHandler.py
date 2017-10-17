@@ -1,5 +1,6 @@
 from pymongo import MongoClient
-from AppConfig.ConfigSettings import ConfigSettings
+
+from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
 
 
 class DbOperationsHandler:

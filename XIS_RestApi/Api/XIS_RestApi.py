@@ -1,8 +1,9 @@
-from flask import Flask, request, make_response, jsonify, abort
 import json
-from AppConfig.ConfigSettings import ConfigSettings
-from Mongodb_OpsHandler.DbOperationsHandler import DbOperationsHandler
 
+from XIS_RestApi.AppConfig.ConfigSettings import ConfigSettings
+from flask import Flask, request, make_response, jsonify, abort
+
+from XIS_RestApi.Mongodb_OpsHandler.DbOperationsHandler import DbOperationsHandler
 
 app = Flask(__name__)
 
