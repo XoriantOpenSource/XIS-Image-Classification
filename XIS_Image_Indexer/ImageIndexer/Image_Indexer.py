@@ -30,7 +30,7 @@ class ImageIndexer:
     def get_image_files(self, dir_path):
         if not isdir(dir_path):
             return None
-        image_extensions = self.config_settings.image_files_extensions
+        image_extensions = list(self.config_settings.image_files_extensions)
 
         # get image file paths with match filter criteria
         image_files = [join(dir_path, image_file) for image_file in listdir(dir_path) if

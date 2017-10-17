@@ -62,6 +62,7 @@ class ConfigSettings:
             print("failed to open config file")
             return False
 
+
 if __name__ == "__main__":
     configSettings = ConfigSettings()
     configSettings.read_config_settings()

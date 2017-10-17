@@ -49,8 +49,8 @@ class GCP_Storage_Crud:
         if not isdir(dir_path):
             raise NotADirectoryError("given path is not a directory")
 
-        image_extensions = ["jpg", "bmp", "png", "gif"]
-
+        #image_extensions = ["jpg", "bmp", "png", "gif"]
+        image_extensions = list(self.appConfigSettings.image_files_extensions)
         # get image file paths with match filter criteria
         image_files = [join(dir_path, image_file) for image_file in listdir(dir_path) if
                        isfile(join(dir_path, image_file)) and

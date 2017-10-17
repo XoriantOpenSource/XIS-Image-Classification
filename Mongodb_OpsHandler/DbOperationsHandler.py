@@ -4,7 +4,7 @@ from AppConfig.ConfigSettings import ConfigSettings
 
 
 class DbOperationsHandler:
-    def __init__(self,configSettings):
+    def __init__(self, configSettings):
 
         self.config_settings = configSettings
 
@@ -71,7 +71,7 @@ class DbOperationsHandler:
                 result_image_docs = self.images.find({'labels': {'$in': labels}})
                 for image_doc in result_image_docs:
                     search_result.append(image_doc['image_object_name'])
-                    #search_result.append(image_doc)
+                    # search_result.append(image_doc)
                 return search_result
             else:
                 print("failed to search")
@@ -93,6 +93,7 @@ def main():
         # filtered_results = dbOps.search_by_labels(search_filter)
         # for filtered_result in filtered_results:
         #     print(filtered_result)
+
 
 if __name__ == '__main__':
     main()
