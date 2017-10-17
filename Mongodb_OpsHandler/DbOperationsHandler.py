@@ -1,12 +1,11 @@
 from pymongo import MongoClient
-from AppConfig.AppConfigSettings import AppConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 
 
 class DbOperationsHandler:
+
     def __init__(self,configSettings):
-
         self.config_settings = configSettings
-
         # db specific details
         self.port = self.config_settings.mongo_port
         self.host = self.config_settings.mongo_host
@@ -84,7 +83,7 @@ class DbOperationsHandler:
 
 
 def main():
-    config_settings = AppConfigSettings()
+    config_settings = ConfigSettings()
     if config_settings.read_config_settings():
         dbOps = DbOperationsHandler(config_settings)
         # image_doc = {'image_object_name': 'images_obj6', 'labels': ['cheetah', 'wild animal']}

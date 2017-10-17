@@ -5,7 +5,7 @@ import minio
 from minio import error
 from minio import policy
 
-from AppConfig.AppConfigSettings import AppConfigSettings
+from AppConfig.ConfigSettings import ConfigSettings
 
 
 class MinioOperationsHandler:
@@ -35,9 +35,6 @@ class MinioOperationsHandler:
     def get_client(self):
         return minio.Minio(endpoint=self.endpoint, access_key=self.key, secret_key=self.secret, secure=True)
 
-    def get_file_name(self, filepath, include_extension=False):
-        return basename(filepath) if include_extension else splitext(basename(filepath))[0]
-
     def check_status(self):
         if self.minio_client is None:
             self.minio_client = self.get_client()
@@ -49,6 +46,11 @@ class MinioOperationsHandler:
             if image_object.object_name is objName:
                 return True
         return False
+
+
+    @staticmethod
+    def get_file_name(filepath, include_extension=False):
+        return basename(filepath) if include_extension else splitext(basename(filepath))[0]
 
     def upload_image(self, image_file):
         self.check_status()
@@ -64,24 +66,15 @@ class MinioOperationsHandler:
             # log error here
             return False
 
-    def get_object_name(self,image_object_name):
-        if image_object_name is None:
-            return None
-
-        bucket_name,object_name = image_object_name.split('_')
-        filepath = join(self.config_settings.download_location, object_name)
-        return bucket_name,object_name,filepath
-
-    def download_image(self, image_object_name):
-        if image_object_name is None or not isdir(self.config_settings.download_location):
-            # log error here
+    def download_image(self, image_object_name, download_location):
+        if image_object_name is None or not isdir(download_location):
             return None
         self.check_status()
         try:
-            bucket_name,object_name, imagefilepath = self.get_object_name(image_object_name)
-            if bucket_name is not None and object_name is not None and imagefilepath is not None:
+            bucket_name, object_name = image_object_name.split('_')
+            if bucket_name is not None and object_name is not None:
                 self.minio_client.fget_object(bucket_name=bucket_name, object_name=object_name,
-                                              file_path=imagefilepath)
+                                              file_path=join(download_location, object_name))
                 return True
             return False
         except error.ResponseError as ex:
@@ -91,7 +84,7 @@ class MinioOperationsHandler:
 
 
 def main():
-    config_settings = AppConfigSettings()
+    config_settings = ConfigSettings()
     if config_settings.read_config_settings():
         minioOps = MinioOperationsHandler(config_settings)
         #minioOps.upload_image("/home/sujit25/Workspace/XIS/App/GoogleCloudVisionExamples/resources/faulkner.jpg")
