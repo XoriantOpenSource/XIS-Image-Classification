@@ -125,3 +125,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#db.createUser({user:'sujit25',pwd:'sujit25', roles:[{role:'dbAdmin',db:'image_metadata'}]})
+

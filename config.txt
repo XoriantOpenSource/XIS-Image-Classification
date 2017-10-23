@@ -20,8 +20,8 @@ project_id = imageclassifier-181905
 
 [mongo_connection_settings]
 host = localhost
-port =27017
+port = 27017
 db_name = image_metadata
 collection_name = image_labels
-
-
+db_user = sujit25
+db_pass = sujit25

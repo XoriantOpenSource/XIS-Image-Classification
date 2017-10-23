@@ -1,14 +1,15 @@
 from pymongo import MongoClient
-
+#from AppConfig.ConfigSettings import ConfigSettings
 
 class DbOperationsHandler:
     def __init__(self, config_settings):
-
         self.config_settings = config_settings
 
         # db specific details
         self.port = int(self.config_settings.mongo_port)
         self.host = self.config_settings.mongo_host
+        self.dbuser = self.config_settings.mongo_user
+        self.dbpass = self.config_settings.mongo_userpass
         self.db_name = self.config_settings.mongo_dbname
         self.collection_name = self.config_settings.mongo_collection_name
         self.db = None
@@ -17,7 +18,8 @@ class DbOperationsHandler:
 
     def establish_db_connection(self):
         try:
-            client = MongoClient(host=self.host, port=self.port)
+            connection_uri = 'mongodb://{}:{}@{}:{}'.format(self.dbuser,self.dbpass,self.host,self.port)
+            client = MongoClient(connection_uri)
             self.db = client.get_database(name=self.db_name)
             self.images = self.db.get_collection(name=self.collection_name)
             print("established connection to db successfully")
@@ -40,9 +42,10 @@ class DbOperationsHandler:
         if image is None:
             return False
         op_status = self.check_db_connection_status()
-        doc_existence = self.check_existence_of_image_doc(image)
-        if doc_existence:
-            return True
+        if self.images.count() > 0:
+            doc_existence = self.check_existence_of_image_doc(image)
+            if doc_existence:
+                return True
         try:
             if op_status:
                 self.images.insert_one(image)
@@ -69,4 +72,12 @@ class DbOperationsHandler:
         except:
             # log exception here
             return False
-
+#
+# if __name__ == "__main__":
+#
+#     configSettings = ConfigSettings()
+#     if configSettings.read_config_settings():
+#         dbOps = DbOperationsHandler(configSettings)
+#         dbOps.establish_db_connection()
+#         image = {'labels': ['dog', 'dog like mammal', 'grass', 'dog breed', 'grassland', 'meadow'], 'image_object_name': 'xis-images_faulkner.jpg'}
+#         dbOps.insert_image(image=image)

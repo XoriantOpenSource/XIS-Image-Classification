@@ -23,7 +23,8 @@ class ConfigSettings:
         self.mongo_port = None
         self.mongo_dbname = None
         self.mongo_collection_name = None
-
+        self.mongo_user = None
+        self.mongo_userpass = None
 
         # google cloud storage settings
         self.gstorage_bucket_name = None
@@ -56,6 +57,9 @@ class ConfigSettings:
             self.mongo_port = config_parser["mongo_connection_settings"]["port"]
             self.mongo_collection_name = config_parser["mongo_connection_settings"]["collection_name"]
             self.mongo_dbname = config_parser["mongo_connection_settings"]["db_name"]
+            self.mongo_user = config_parser["mongo_connection_settings"]["db_user"]
+            self.mongo_userpass = config_parser["mongo_connection_settings"]["db_pass"]
+
 
             # read gcp storage settings
             self.project_id = config_parser["google_cloud_storage_settings"]["project_id"]

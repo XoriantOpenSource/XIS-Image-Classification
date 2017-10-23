@@ -3,7 +3,7 @@ from XIS_Image_Indexer.ImageIndexer.Image_Indexer import ImageIndexer
 
 
 def main():
-    config_settings = ConfigSettings
+    config_settings = ConfigSettings()
     if not config_settings.read_config_settings():
         print("error occurred while reading config")
         return
