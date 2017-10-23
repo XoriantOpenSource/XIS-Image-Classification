@@ -25,7 +25,7 @@ class ImageIndexer:
         else:
             self.minio_ops_handler = MinioOperationsHandler(config_setting=config_settings)
             self.minio_ops_handler.init_minio_handler()
-        # print(self.client)
+            # print(self.client)
 
     def get_image_files(self, dir_path):
         if not isdir(dir_path):
@@ -89,8 +89,9 @@ class ImageIndexer:
             return None
         query_results = self.db_operations_handler.search_by_labels(query)
         for query_result in query_results:
-            self.minio_ops_handler.download_image(query_result,
-                                                  download_location=self.config_settings.download_location)
+            self.gcp_storage_handler.download_image(
+                query_result) if self.config_settings.use_gcp_storage else self.minio_ops_handler.download_image(
+                query_result)
 
     def index_images(self):
         if not (self.config_settings.source_images_location and isdir(self.config_settings.source_images_location)):

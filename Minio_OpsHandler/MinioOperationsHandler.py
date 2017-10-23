@@ -58,15 +58,15 @@ class MinioOperationsHandler:
             # log error here
             return False
 
-    def download_image(self, image_object_name, download_location):
-        if not (image_object_name and isdir(download_location)):
+    def download_image(self, image_object_name):
+        if not (image_object_name and isdir(self.config_settings.download_location)):
             return None
         self.check_status()
         try:
             bucket_name, object_name = image_object_name.split('_')
             if bucket_name and object_name:
                 self.minio_client.fget_object(bucket_name=bucket_name, object_name=object_name,
-                                              file_path=join(download_location, object_name))
+                                              file_path=join(self.config_settings.download_location, object_name))
                 return True
             return False
         except error.ResponseError:

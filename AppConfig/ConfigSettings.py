@@ -21,6 +21,9 @@ class ConfigSettings:
         # mongo settings
         self.mongo_host = None
         self.mongo_port = None
+        self.mongo_dbname = None
+        self.mongo_collection_name = None
+
 
         # google cloud storage settings
         self.gstorage_bucket_name = None
@@ -51,6 +54,8 @@ class ConfigSettings:
             # read mongo settings
             self.mongo_host = config_parser["mongo_connection_settings"]["host"]
             self.mongo_port = config_parser["mongo_connection_settings"]["port"]
+            self.mongo_collection_name = config_parser["mongo_connection_settings"]["collection_name"]
+            self.mongo_dbname = config_parser["mongo_connection_settings"]["db_name"]
 
             # read gcp storage settings
             self.project_id = config_parser["google_cloud_storage_settings"]["project_id"]

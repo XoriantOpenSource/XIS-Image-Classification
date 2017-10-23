@@ -65,13 +65,22 @@ class GCPStorageCrud:
 
         return [self.upload_image(image_file_path) for image_file_path in image_file_paths]
 
-    def download_image(self, object_name):
-        client = self.get_storage_client()
-        bucket = client.get_bucket(self.bucket_name)
-        blob = bucket.blob(object_name)
-        if blob:
-            blob.download_to_filename(join(self.app_config_settings.download_location, object_name))
-            print("{} downloaded successfully ".format(object_name))
-
+    def download_image(self, image_object_name):
+        bucket_name, object_name = image_object_name.split("_")
+        if bucket_name and object_name:
+            try:
+                client = self.get_storage_client()
+                bucket = client.get_bucket(bucket_name)
+                blob = bucket.blob(object_name)
+                if blob:
+                    blob.download_to_filename(join(self.app_config_settings.download_location, object_name))
+                    print("{} downloaded successfully ".format(object_name))
+                    return True
+            except:
+                print("failed to download, error occurred")
+                return False
+        else:
+            print("failed to download, bucket name or object name is empty")
+            return False
 
 

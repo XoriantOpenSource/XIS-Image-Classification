@@ -9,8 +9,8 @@ class DbOperationsHandler:
         # db specific details
         self.port = int(self.config_settings.mongo_port)
         self.host = self.config_settings.mongo_host
-        self.db_name = 'Image_Labels'
-        self.collection_name = 'Images_Collection'
+        self.db_name = self.config_settings.mongo_dbname
+        self.collection_name = self.config_settings.mongo_collection_name
         self.db = None
         self.images = None
         self.establish_db_connection()
@@ -33,13 +33,16 @@ class DbOperationsHandler:
         return True
 
     def check_existence_of_image_doc(self, image):
-        return not self.images.find({'image_object_name': image['image_object_name'], 'labels': image['labels']})
+        #return self.images.find({'image_object_name': image['image_object_name'], 'labels': image['labels']}).count()
+        return not self.images.find(image).count() == 0
 
     def insert_image(self, image):
         if image is None:
             return False
         op_status = self.check_db_connection_status()
-        # doc_existence = self.check_existence_of_image_doc(image)
+        doc_existence = self.check_existence_of_image_doc(image)
+        if doc_existence:
+            return True
         try:
             if op_status:
                 self.images.insert_one(image)

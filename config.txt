@@ -13,6 +13,7 @@ secret = zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG
 bucket_name = xis-images
 prefix = xis-images-prefix
 
+
 [google_cloud_storage_settings]
 bucket_name = xis-images
 project_id = imageclassifier-181905
@@ -20,5 +21,7 @@ project_id = imageclassifier-181905
 [mongo_connection_settings]
 host = localhost
 port =27017
-     
+db_name = image_metadata
+collection_name = image_labels
+
 
