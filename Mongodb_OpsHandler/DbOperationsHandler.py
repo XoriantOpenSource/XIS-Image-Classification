@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-#from AppConfig.ConfigSettings import ConfigSettings
+# from AppConfig.ConfigSettings import ConfigSettings
 
 class DbOperationsHandler:
     def __init__(self, config_settings):
@@ -18,7 +18,7 @@ class DbOperationsHandler:
 
     def establish_db_connection(self):
         try:
-            connection_uri = 'mongodb://{}:{}@{}:{}'.format(self.dbuser,self.dbpass,self.host,self.port)
+            connection_uri = 'mongodb://{}:{}@{}:{}/{}'.format(self.dbuser,self.dbpass,self.host,self.port,self.db_name)
             client = MongoClient(connection_uri)
             self.db = client.get_database(name=self.db_name)
             self.images = self.db.get_collection(name=self.collection_name)
