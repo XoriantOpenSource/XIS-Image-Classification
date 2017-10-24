@@ -1,4 +1,6 @@
 from pymongo import MongoClient
+from os.path import splitext
+
 # from AppConfig.ConfigSettings import ConfigSettings
 
 class DbOperationsHandler:
@@ -65,7 +67,8 @@ class DbOperationsHandler:
         op_status = self.check_db_connection_status()
         try:
             if op_status:
-                return [image_doc['image_object_name'] for image_doc in self.images.find({'labels': {'$in': labels}})]
+                #return [image_doc['image_object_name'] for image_doc in self.images.find({'labels': {'$in': labels}})]
+                return ["/".join(image_doc['image_object_name'].split("_")) for image_doc in self.images.find({'labels': {'$in': labels}})]
             else:
                 print("failed to search")
                 return False
