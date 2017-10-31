@@ -73,7 +73,7 @@ class ImageIndexer:
 
         if op_status and image_object_name and self.db_operations_handler:
             image_document = {
-                'image_object_name': image_object_name,  # image_object_name.replace("_", ""),
+                'image_object_name': image_object_name,
                 'labels': labels
             }
             return self.db_operations_handler.insert_image(image=image_document)
