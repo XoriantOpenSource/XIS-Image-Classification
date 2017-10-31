@@ -1,10 +1,11 @@
 import configparser
-from os.path import isfile
+from os.path import isfile, abspath
+from os import getcwd
 
 
 class ConfigSettings:
     def __init__(self):
-        self.config_file = "/home/sujit25/Workspace/XIS_App/config.txt"
+        self.config_file = abspath(path=getcwd() + "/../../config.txt")
 
         # general settings
         self.source_images_location = None
@@ -17,6 +18,7 @@ class ConfigSettings:
         self.minio_secret = None
         self.minio_bucket_name = None
         self.minio_prefix = None
+        self.minio_key = None
 
         # mongo settings
         self.mongo_host = None
@@ -59,7 +61,6 @@ class ConfigSettings:
             self.mongo_dbname = config_parser["mongo_connection_settings"]["db_name"]
             self.mongo_user = config_parser["mongo_connection_settings"]["db_user"]
             self.mongo_userpass = config_parser["mongo_connection_settings"]["db_pass"]
-
 
             # read gcp storage settings
             self.project_id = config_parser["google_cloud_storage_settings"]["project_id"]

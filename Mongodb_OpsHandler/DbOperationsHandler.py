@@ -1,7 +1,5 @@
 from pymongo import MongoClient
-from os.path import splitext
 
-# from AppConfig.ConfigSettings import ConfigSettings
 
 class DbOperationsHandler:
     def __init__(self, config_settings):
@@ -20,7 +18,8 @@ class DbOperationsHandler:
 
     def establish_db_connection(self):
         try:
-            connection_uri = 'mongodb://{}:{}@{}:{}/{}'.format(self.dbuser,self.dbpass,self.host,self.port,self.db_name)
+            connection_uri = 'mongodb://{}:{}@{}:{}/{}'.format(self.dbuser, self.dbpass, self.host, self.port,
+                                                               self.db_name)
             client = MongoClient(connection_uri)
             self.db = client.get_database(name=self.db_name)
             self.images = self.db.get_collection(name=self.collection_name)
@@ -37,17 +36,15 @@ class DbOperationsHandler:
         return True
 
     def check_existence_of_image_doc(self, image):
-        #return self.images.find({'image_object_name': image['image_object_name'], 'labels': image['labels']}).count()
+        # return self.images.find({'image_object_name': image['image_object_name'], 'labels': image['labels']}).count()
         return not self.images.find(image).count() == 0
 
     def insert_image(self, image):
-        if image is None:
+        if not image:
             return False
         op_status = self.check_db_connection_status()
-        if self.images.count() > 0:
-            doc_existence = self.check_existence_of_image_doc(image)
-            if doc_existence:
-                return True
+        if self.images.count() > 0 and self.check_existence_of_image_doc(image):
+            return True
         try:
             if op_status:
                 self.images.insert_one(image)
@@ -67,8 +64,9 @@ class DbOperationsHandler:
         op_status = self.check_db_connection_status()
         try:
             if op_status:
-                #return [image_doc['image_object_name'] for image_doc in self.images.find({'labels': {'$in': labels}})]
-                return ["/".join(image_doc['image_object_name'].split("_")) for image_doc in self.images.find({'labels': {'$in': labels}})]
+                # return [image_doc['image_object_name'] for image_doc in self.images.find({'labels': {'$in': labels}})]
+                return ["/".join(image_doc['image_object_name'].split("_")) for image_doc in self.images.find(
+                    {'labels': {'$in': labels}})]
             else:
                 print("failed to search")
                 return False
@@ -82,5 +80,6 @@ class DbOperationsHandler:
 #     if configSettings.read_config_settings():
 #         dbOps = DbOperationsHandler(configSettings)
 #         dbOps.establish_db_connection()
-#         image = {'labels': ['dog', 'dog like mammal', 'grass', 'dog breed', 'grassland', 'meadow'], 'image_object_name': 'xis-images_faulkner.jpg'}
+#         image = {'labels': ['dog', 'dog like mammal', 'grass', 'dog breed', 'grassland', 'meadow'],
+            # 'image_object_name': 'xis-images_faulkner.jpg'}
 #         dbOps.insert_image(image=image)
