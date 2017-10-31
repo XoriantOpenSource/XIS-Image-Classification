@@ -56,10 +56,10 @@ class ImageIndexer:
         if not image_files:
             return
         for index, image_file_path in enumerate(image_files):
-            self.process_image(image_file_path, index)
+            self.process_image(image_file_path)
             # log image file processing status here with file name
 
-    def process_image(self, image_file_path, index):
+    def process_image(self, image_file_path):
         labels = self.get_image_labels(image_file_path)
 
         if self.config_settings.use_gcp_storage:
