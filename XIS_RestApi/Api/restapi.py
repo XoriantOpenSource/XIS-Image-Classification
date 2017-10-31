@@ -1,11 +1,12 @@
 import json
-
+from flask_cors import CORS
 from flask import Flask, request, make_response, jsonify, abort
 
 from AppConfig.ConfigSettings import ConfigSettings
 from Mongodb_OpsHandler.DbOperationsHandler import DbOperationsHandler
 
 app, config_setting, db_ops_handler = Flask(__name__), None, None
+CORS(app)
 
 
 def init_api():
