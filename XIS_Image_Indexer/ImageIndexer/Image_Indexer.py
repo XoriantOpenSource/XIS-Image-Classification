@@ -13,17 +13,17 @@ from Mongodb_OpsHandler.DbOperationsHandler import DbOperationsHandler
 
 
 class ImageIndexer:
-    def __init__(self, config_settings):
-        self.config_settings = config_settings
+    def __init__(self, config_setting):
+        self.config_settings = config_setting
         self.client = vision.ImageAnnotatorClient()
         self.gcp_storage_handler = None
         self.minio_ops_handler = None
 
-        self.db_operations_handler = DbOperationsHandler(config_settings)
-        if config_settings.use_gcp_storage:
-            self.gcp_storage_handler = GCPStorageCrud(app_config_settings=config_settings)
+        self.db_operations_handler = DbOperationsHandler(config_setting)
+        if config_setting.use_gcp_storage:
+            self.gcp_storage_handler = GCPStorageCrud(app_config_settings=config_setting)
         else:
-            self.minio_ops_handler = MinioOperationsHandler(config_setting=config_settings)
+            self.minio_ops_handler = MinioOperationsHandler(config_setting=config_setting)
             self.minio_ops_handler.init_minio_handler()
             # print(self.client)
 
@@ -53,27 +53,27 @@ class ImageIndexer:
         return filtered_labels
 
     def classify_images(self, image_files):
-        if len(image_files) == 0 or image_files is None:
+        if not image_files:
             return
-        for image_file_path in image_files:
-            self.process_image(image_file_path)
+        for index, image_file_path in enumerate(image_files):
+            self.process_image(image_file_path, index)
             # log image file processing status here with file name
 
-    def process_image(self, image_file_path):
+    def process_image(self, image_file_path, index):
         labels = self.get_image_labels(image_file_path)
 
         if self.config_settings.use_gcp_storage:
             op_status = self.gcp_storage_handler.upload_image(image_file_path)
-            image_object_name = self.gcp_storage_handler.bucket_name + "_" + self.get_file_name(
-                image_file_path, include_extension=True)
+            image_object_name = self.gcp_storage_handler.bucket_name + "_" + self. \
+                get_file_name(image_file_path, include_extension=True)
         else:
             op_status = self.minio_ops_handler.upload_image(image_file_path)
-            image_object_name = self.minio_ops_handler.bucket_name + "_" + self.get_file_name(
-                image_file_path, include_extension=True)
+            image_object_name = self.minio_ops_handler.bucket_name + "_" + self. \
+                get_file_name(image_file_path, include_extension=True)
 
         if op_status and image_object_name and self.db_operations_handler:
             image_document = {
-                'image_object_name': image_object_name,
+                'image_object_name': "image" + str(index),  # image_object_name.replace("_", ""),
                 'labels': labels
             }
             return self.db_operations_handler.insert_image(image=image_document)
@@ -85,13 +85,12 @@ class ImageIndexer:
         return basename(file_path) if include_extension else splitext(basename(file_path))[0]
 
     def search_images(self, query):
-        if query is None:
+        if not query:
             return None
         query_results = self.db_operations_handler.search_by_labels(query)
         for query_result in query_results:
-            self.gcp_storage_handler.download_image(
-                query_result) if self.config_settings.use_gcp_storage else self.minio_ops_handler.download_image(
-                query_result)
+            self.gcp_storage_handler.download_image(query_result) if self.config_settings.use_gcp_storage \
+                else self.minio_ops_handler.download_image(query_result)
 
     def index_images(self):
         if not (self.config_settings.source_images_location and isdir(self.config_settings.source_images_location)):
@@ -107,7 +106,7 @@ class ImageIndexer:
         self.search_images(search_query)
 
 
-def main():
+if __name__ == "__main__":
     # source_images_location = "/home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/resources"
     # download_location = "/home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/downloads"
 
@@ -119,12 +118,7 @@ def main():
 
         # search and download results
         # search_query = ['cat', 'dog']
-        # labels =indexer.search_by_query(search_query)
+        # labels = indexer.search_by_query(search_query)
         # print()
 
-
-if __name__ == "__main__":
-    main()
-
-#db.createUser({user:'sujit25',pwd:'sujit25', roles:[{role:'dbAdmin',db:'image_metadata'}]})
-
+# db.createUser({user:'sujit25',pwd:'sujit25', roles:[{role:'dbAdmin',db:'image_metadata'}]})

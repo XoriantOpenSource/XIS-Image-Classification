@@ -1,6 +1,6 @@
 [general_settings]
-source_images_location = /home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/resources
-download_location = /home/sujit25/Workspace/MinioPython/GoogleCloudVisionExamples/downloads
+source_images_location = C:\Users\pandey_ak\Desktop\img
+download_location = C:\Users\pandey_ak\Desktop\d_img
 use_gcp_storage = true
 
 [image_filter]
@@ -19,9 +19,9 @@ bucket_name = xis-images
 project_id = imageclassifier-181905
 
 [mongo_connection_settings]
-host = localhost
-port = 27017
+host = ds229415.mlab.com
+port = 29415
 db_name = image_metadata
 collection_name = image_labels
-db_user = sujit25
-db_pass = sujit25
+db_user = demouser
+db_pass = qwerty**
