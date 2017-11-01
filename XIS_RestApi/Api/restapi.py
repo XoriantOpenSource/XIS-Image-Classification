@@ -24,11 +24,11 @@ init_api()
 @app.route("/xis/api/v1.0/label", methods=['POST'])
 def get_categories():
     image_query = request.get_json()
-    if image_query is None or len(image_query) == 0:
+    if not image_query:
         return abort(400)
     search_query = image_query['query']
     image_object_names = db_ops_handler.search_by_labels(search_query)
-    if not image_object_names or len(image_object_names) == 0:
+    if not image_object_names:
         return make_response(jsonify({"status": "failure", "result": "[]"})), 404
     else:
         json_response = json.dumps(image_object_names)
@@ -46,4 +46,4 @@ def get_categories():
 
 if __name__ == "__main__":
     init_api()
-    app.run(debug=False)
+    app.run(host='0.0.0.0', port=80, debug=False, threaded=True)

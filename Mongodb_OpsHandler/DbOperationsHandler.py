@@ -39,16 +39,16 @@ class DbOperationsHandler:
         # return self.images.find({'image_object_name': image['image_object_name'], 'labels': image['labels']}).count()
         return not self.images.find(image).count() == 0
 
-    def insert_image(self, image):
-        if not image:
+    def insert_images(self, image_docs):
+        if not image_docs:
             return False
         op_status = self.check_db_connection_status()
-        if self.images.count() > 0 and self.check_existence_of_image_doc(image):
+        if self.images.count() > 0 and all(self.check_existence_of_image_doc(image_x) for image_x in image_docs):
             return True
         try:
             if op_status:
-                self.images.insert_one(image)
-                print("image document inserted successfully")
+                self.images.insertMany([_ for _ in image_docs if not self.check_existence_of_image_doc(_)])
+                print("image documents inserted successfully")
                 return True
             else:
                 # print("failed to insert image document")

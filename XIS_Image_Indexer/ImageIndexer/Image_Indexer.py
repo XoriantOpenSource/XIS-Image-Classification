@@ -53,11 +53,9 @@ class ImageIndexer:
         return filtered_labels
 
     def classify_images(self, image_files):
-        if not image_files:
-            return
-        for index, image_file_path in enumerate(image_files):
-            self.process_image(image_file_path)
-            # log image file processing status here with file name
+        return self.db_operations_handler.\
+            insert_images(image_docs=[self.process_image(image_file_path) for index, image_file_path in
+                                      enumerate(image_files)]) if image_files else None
 
     def process_image(self, image_file_path):
         labels = self.get_image_labels(image_file_path)
@@ -76,7 +74,8 @@ class ImageIndexer:
                 'image_object_name': image_object_name,
                 'labels': labels
             }
-            return self.db_operations_handler.insert_image(image=image_document)
+            return image_document
+            # return self.db_operations_handler.insert_image(image=image_document)
         else:
             return False
 

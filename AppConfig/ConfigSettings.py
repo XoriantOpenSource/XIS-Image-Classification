@@ -5,7 +5,7 @@ from os import getcwd
 
 class ConfigSettings:
     def __init__(self):
-        self.config_file = abspath(path=getcwd() + "/../../config.txt")
+        self.config_file = abspath(path=getcwd() + "/../config.txt")
 
         # general settings
         self.source_images_location = None
