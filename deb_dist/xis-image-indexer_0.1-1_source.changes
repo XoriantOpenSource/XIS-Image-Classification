@@ -1,0 +1,28 @@
+Format: 1.8
+Date: Thu, 02 Nov 2017 13:52:39 +0530
+Source: xis-image-indexer
+Binary: python-xis-image-indexer
+Architecture: source
+Version: 0.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Sujit Nalawade <technosujit25@gmail.com>
+Changed-By: Sujit Nalawade <technosujit25@gmail.com>
+Description:
+ python-xis-image-indexer - XIS Image Classifier
+Changes:
+ xis-image-indexer (0.1-1) unstable; urgency=low
+ .
+   * source package automatically created by stdeb 0.8.5
+Checksums-Sha1:
+ 4cfce9b197d411aefdb8ebd0d7feda0a91897c77 997 xis-image-indexer_0.1-1.dsc
+ f6fa86a44f5245dc812c7b6eb33c12e85cc85b16 4076 xis-image-indexer_0.1.orig.tar.gz
+ 75b1c88ac9071a8673b851ea9508adcbc5c19a1f 904 xis-image-indexer_0.1-1.debian.tar.xz
+Checksums-Sha256:
+ bcc32def0fdeda302a303c197d12d8cd2aa54454f870f9795d5636eb57558683 997 xis-image-indexer_0.1-1.dsc
+ c848508af66aad6fa4c95c609d82119b2b326620172d74dbcb0caa27992202a6 4076 xis-image-indexer_0.1.orig.tar.gz
+ 2a2610e02f6e09304cfcbcdb131204a9925d63a255b802022e17b7bfedda5002 904 xis-image-indexer_0.1-1.debian.tar.xz
+Files:
+ 43cd36913b99c75d71884de6a29aa630 997 python optional xis-image-indexer_0.1-1.dsc
+ 4cad6edc84768e9ad109a38aef68e82e 4076 python optional xis-image-indexer_0.1.orig.tar.gz
+ a6530c60b31f63a0481840d9c55c9305 904 python optional xis-image-indexer_0.1-1.debian.tar.xz

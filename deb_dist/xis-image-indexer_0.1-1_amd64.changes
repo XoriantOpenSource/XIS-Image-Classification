@@ -1,0 +1,22 @@
+Format: 1.8
+Date: Thu, 02 Nov 2017 13:52:39 +0530
+Source: xis-image-indexer
+Binary: python-xis-image-indexer
+Architecture: all
+Version: 0.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Sujit Nalawade <technosujit25@gmail.com>
+Changed-By: Sujit Nalawade <technosujit25@gmail.com>
+Description:
+ python-xis-image-indexer - XIS Image Classifier
+Changes:
+ xis-image-indexer (0.1-1) unstable; urgency=low
+ .
+   * source package automatically created by stdeb 0.8.5
+Checksums-Sha1:
+ 25090638840ac919ff5229d22697ba2007c35aea 5150 python-xis-image-indexer_0.1-1_all.deb
+Checksums-Sha256:
+ f9f144b753730822f6703202f00be2196300faab0a475060dc4e5bf335497e66 5150 python-xis-image-indexer_0.1-1_all.deb
+Files:
+ adbbf571bf4f00d7df33c67aa90be695 5150 python optional python-xis-image-indexer_0.1-1_all.deb

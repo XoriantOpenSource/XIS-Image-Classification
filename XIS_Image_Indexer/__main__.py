@@ -2,7 +2,7 @@ from AppConfig.ConfigSettings import ConfigSettings
 from XIS_Image_Indexer.ImageIndexer.Image_Indexer import ImageIndexer
 from argparse import ArgumentParser
 
-if __name__ == '__main__':
+def main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--source_dir', help='Directory containing images to be indexed')
     parser.add_argument('-t', '--target_dir', help='Directory where images may be downloaded')
@@ -22,3 +22,7 @@ if __name__ == '__main__':
     # query = ['cat','dog']
     # image_indexer.search_by_query(query)
     # return
+
+
+if __name__ == '__main__':
+    main()

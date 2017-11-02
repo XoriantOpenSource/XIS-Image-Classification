@@ -1,0 +1,17 @@
+README.md
+setup.py
+AppConfig/ConfigSettings.py
+AppConfig/__init__.py
+GCP_StorageOpsHandler/GCP_StorageOpsHandler.py
+GCP_StorageOpsHandler/__init__.py
+Minio_OpsHandler/MinioOperationsHandler.py
+Minio_OpsHandler/__init__.py
+XIS_Image_Indexer/__init__.py
+XIS_Image_Indexer/__main__.py
+XIS_RestApi/__init__.py
+xis_image_indexer.egg-info/PKG-INFO
+xis_image_indexer.egg-info/SOURCES.txt
+xis_image_indexer.egg-info/dependency_links.txt
+xis_image_indexer.egg-info/entry_points.txt
+xis_image_indexer.egg-info/not-zip-safe
+xis_image_indexer.egg-info/top_level.txt

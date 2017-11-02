@@ -1,0 +1,3 @@
+[console_scripts]
+image-indexer = XIS_Image_Indexer.__main__:main
+
