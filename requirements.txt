@@ -22,7 +22,7 @@ gunicorn==19.7.1
 httplib2==0.10.3
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.11.3
 MarkupSafe==1.0
 minio==2.2.6
 mongoengine==0.14.3
